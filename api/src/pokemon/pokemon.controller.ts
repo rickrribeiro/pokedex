@@ -1,4 +1,13 @@
-import { Controller, Get, Param, Query } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Query,
+} from "@nestjs/common";
 import { PokemonService } from "./pokemon.service";
 import { PokedexResponse } from "./interfaces/pokemon-list.interface";
 import { Pokemon } from "pokedex-promise-v2";
@@ -30,5 +39,19 @@ export class PokemonController {
   @Get(":nameOrId")
   getByNameOrId(@Param("nameOrId") nameOrId: string): Promise<Pokemon> {
     return this.pokemonService.getByNameOrId(nameOrId);
+  }
+
+  @Post("pokeai")
+  @HttpCode(HttpStatus.OK)
+  async askPokeAI(@Body() body: any): Promise<any> {
+    const response = await this.pokemonService.askPokeAI(
+      body.question,
+      body.pokemon,
+      body.chatHistory || [],
+    );
+    console.log(body.chatHistory);
+    return {
+      response,
+    };
   }
 }

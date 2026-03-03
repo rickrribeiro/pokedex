@@ -7,3 +7,10 @@
     cursor: pointer;
     &:hover { opacity: 0.8; }
 }
+
+.details-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:30px;
+}

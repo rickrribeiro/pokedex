@@ -13,7 +13,7 @@ async function bootstrap() {
   );
   app.enableCors({
     origin: "http://127.0.0.1:4200",
-    methods: "GET",
+    methods: "GET,POST",
   });
   await app.listen(3000);
 }

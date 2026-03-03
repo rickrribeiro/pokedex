@@ -1,12 +1,15 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import PokedexAPI from "pokedex-promise-v2";
 import { PokemonListItem } from "./interfaces/pokemon-list.interface";
+import { pokemonSpecialistPrompt } from "./prompts/pokemon-specialist.prompt";
+import { Content } from "@google/genai";
+import { GeminiProvider } from "./providers/gemini.provider";
 
 @Injectable()
 export class PokemonService {
   private pokedexAPI: PokedexAPI;
 
-  constructor() {
+  constructor(private readonly geminiProvider: GeminiProvider) {
     this.pokedexAPI = new PokedexAPI();
   }
 
@@ -70,5 +73,24 @@ export class PokemonService {
       });
       throw error;
     }
+  }
+
+  async askPokeAI(
+    question: string,
+    pokemonName: string,
+    chatHistory: any[],
+  ): Promise<string> {
+    const systemInstruction = pokemonSpecialistPrompt(pokemonName);
+
+    const formattedHistory: Content[] = chatHistory.map((msg) => ({
+      role: msg.role,
+      parts: [{ text: msg.content }],
+    }));
+
+    return await this.geminiProvider.generateChatResponse(
+      systemInstruction,
+      formattedHistory,
+      question,
+    );
   }
 }

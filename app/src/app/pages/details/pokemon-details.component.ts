@@ -1,6 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { PokemonService } from '../../pokemon/pokemon.service';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-pokemon-details',
@@ -11,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PokemonDetailsComponent implements OnInit {
   pokemon = signal<any>(null);
   loading = signal(false);
+  enableAISearch = environment.t001_enableAIInsightsFeature;
 
   constructor(private route: ActivatedRoute, private pokemonService: PokemonService) {}
 

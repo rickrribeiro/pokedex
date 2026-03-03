@@ -10,6 +10,7 @@ import { PokemonDetailsComponent } from "./pages/details/pokemon-details.compone
 import { PokemonCardComponent } from "./components/card/pokemon-card.component";
 import { PokemonSearchBarComponent } from "./components/search/pokemon-search-bar.component";
 import { PokemonDetailCardComponent } from "./components/detail-card/pokemon-detail-card.component";
+import { AIInsightsComponent } from "./components/ai-insights/ai-insights.component";
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { PokemonDetailCardComponent } from "./components/detail-card/pokemon-det
     PokedexAppComponent,
     PokemonCardComponent,
     PokemonSearchBarComponent,
-    PokemonDetailCardComponent
+    PokemonDetailCardComponent,
+    AIInsightsComponent
   ],
   bootstrap: [PokedexAppComponent],
 })

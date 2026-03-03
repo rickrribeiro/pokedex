@@ -5,7 +5,12 @@
     <div class="loader"></div>
   </div>
   } @else if (pokemon()) {
-  <pokemon-detail-card [pokemon]="pokemon"></pokemon-detail-card>
+  <div class="details-container">
+    <pokemon-detail-card [pokemon]="pokemon"></pokemon-detail-card>
+    @if (enableAISearch) {
+    <ai-insights [pokemon]="pokemon"></ai-insights>
+    }
+  </div>
   } @else {
   <p class="error-msg">Pokémon not found.</p>
   }

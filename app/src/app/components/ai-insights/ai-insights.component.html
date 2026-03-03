@@ -1,0 +1,43 @@
+<button class="chat-button" (click)="isOpen = !isOpen">
+    <span>AI</span>
+</button>
+
+@if (isOpen) {
+<div class="chat-window">
+    <div class="chat-header">
+        <strong>PokeAI - {{ pokemon().name }}</strong>
+    </div>
+
+    <div class="chat-content">
+        @for (msg of chatHistory(); track $index) {
+        <div [class]="'message ' + msg.role">
+            <strong>{{ msg.role === 'user' ? 'You' : 'PokeAI' }}:</strong>
+            <p>{{ msg.content }}</p>
+        </div>
+        } @empty {
+        @if (!loadingAIResponse()) {
+        <p class="placeholder">Ask PokeAI something about {{ pokemon().name }}!</p>
+        <p>Example: How would {{ pokemon().name }} survive in Brazil?</p>
+        }
+        }
+
+        @if (loadingAIResponse()) {
+        <div class="loader"></div>
+        }
+    </div>
+
+    <div class="chat-footer">
+        <textarea #search placeholder="Ask something..." (input)="0"
+            (keyup.enter)="emitSearch(search.value); search.value=''"></textarea>
+
+        <button [disabled]="search.value.length < 15 || loadingAIResponse()"
+            (click)="emitSearch(search.value); search.value='' ">
+            Send
+        </button>
+    </div>
+
+    @if (search.value.length > 0 && search.value.length < 15) { <small class="error-msg">Minimum 15 characters
+        required</small>
+        }
+</div>
+}

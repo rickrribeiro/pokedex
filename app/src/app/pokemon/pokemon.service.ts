@@ -26,4 +26,10 @@ export class PokemonService {
   getPokemonByNameOrId(id: number | string): Observable<any> {
     return this.http.get<any>(`${this.API_URL}/pokemon/${id}`);
   }
+
+  // TODO: tipar aq
+  askPokeAI(question: string, pokemon?: string, chatHistory?: any[]): Observable<any> {
+    return this.http.post<any>(`${this.API_URL}/pokemon/pokeai`, { question, pokemon, chatHistory });
+  }
+
 }

@@ -10,7 +10,21 @@ This repository is a Pokédex application. It contains a server-side REST API bu
 - [Tests](#tests)
 
 ## Configs
-### Environment Variables
+### Environment Backend
+.env file
+```
+GEMINI_API_KEY=
+```
+Configure GEMINI_API_KEY if you want to enable the AI Insights feature
+
+### Environment Frontend
+example:
+```js
+{
+  apiUrl: "http://127.0.0.1:3000/api", // STRING - Backend API URL
+  t001_enableAIInsightsFeature: true // Boolean - Feature toggle to enable AI search feature
+};
+```
 
 ## Run with Docker
 ### Prerequisites
