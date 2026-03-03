@@ -10,6 +10,7 @@ import { PokemonService } from '../../pokemon/pokemon.service';
 export class PokemonListComponent implements OnInit {
   list = signal<any[]>([]);
   loading = signal(false);
+  loadingMore = signal(false);
   totalPokemons = signal(0);
   constructor(private pokemonService: PokemonService) {}
 
@@ -34,17 +35,19 @@ export class PokemonListComponent implements OnInit {
     });
   }
 
-  loadMore() {
-    this.loading.set(true);
+  loadMore(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.loadingMore.set(true);
     const offset = this.list().length;
     this.pokemonService.getPokemons(4, offset).subscribe({
       next: (data) => {
-        this.list.set([...this.list(), ...data.results]);
-        this.loading.set(false);
+        this.list.update(oldList => [...oldList, ...data.results]);
+        this.loadingMore.set(false);
       },
       error: (err) => {
         console.log(err);
-        this.loading.set(false);
+        this.loadingMore.set(false);
       }
     });
   }

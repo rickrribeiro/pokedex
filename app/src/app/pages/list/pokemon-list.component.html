@@ -15,8 +15,12 @@
   </div>
   @if (list().length > 0) {
   <div class="load-more-container">
-    <button type="button" class="load-more-btn" (click)="loadMore()" [disabled]="list().length >= totalPokemons()">
-      @if (list().length >= totalPokemons()) {
+    <button type="button" class="load-more-btn" (click)="loadMore($event)"
+      [disabled]="list().length >= totalPokemons() || loadingMore()">
+
+      @if (loadingMore()) {
+      Catching more...
+      } @else if (list().length >= totalPokemons()) {
       All Pokémons Caught!
       } @else {
       Load More ({{ list().length }} / {{ totalPokemons() }})
