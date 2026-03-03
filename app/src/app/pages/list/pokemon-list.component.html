@@ -1,0 +1,28 @@
+<div class="pokemon-list">
+  <pokemon-search-bar (searchEvent)="getByName($event)"></pokemon-search-bar>
+
+  @if (loading()) {
+  <span class="loader"></span>
+  <p>Ash is searching for pokemons...</p>
+  } @else {
+  <div class="pokemon-grid">
+    @for (p of list(); track p.name) {
+    <app-pokemon-card [pokemon]="p"></app-pokemon-card>
+    }
+    @empty {
+    <p>No pokemon found.</p>
+    }
+  </div>
+  @if (list().length > 0) {
+  <div class="load-more-container">
+    <button type="button" class="load-more-btn" (click)="loadMore()" [disabled]="list().length >= totalPokemons()">
+      @if (list().length >= totalPokemons()) {
+      All Pokémons Caught!
+      } @else {
+      Load More ({{ list().length }} / {{ totalPokemons() }})
+      }
+    </button>
+  </div>
+  }
+  }
+</div>

@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  api:
+    build: ./api
+    container_name: pokedex-api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    working_dir: /app
+    command: npm run start
+    environment:
+      - NODE_ENV=development
+
+  app:
+    build: ./app
+    container_name: pokedex-app
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+      - /app/.angular
+    working_dir: /app
+    command: npm run start
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - api

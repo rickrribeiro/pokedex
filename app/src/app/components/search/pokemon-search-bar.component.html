@@ -1,0 +1,13 @@
+<div class="search-container">
+    <input #search type="text" placeholder="Pikac..." (input)="0" (keyup.enter)="emitSearch(search.value)">
+
+    <button [disabled]="search.value.length > 0 && search.value.length < 3" (click)="emitSearch(search.value)">
+        Search
+    </button>
+
+    @if (search.value.length > 0 && search.value.length < 3) { <small
+        style="color: #ff3d00; display: block; margin-top: 5px;">
+        Type at least 3 characters to search
+        </small>
+        }
+</div>

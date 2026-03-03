@@ -1,0 +1,21 @@
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 20%));
+    gap: 24px;
+    padding: 40px 20px;
+    justify-content: center;
+}
+
+.load-more-container {
+    display: flex;
+    justify-content: center;
+}
+
+.load-more-btn {
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover { opacity: 0.8; }
+}
