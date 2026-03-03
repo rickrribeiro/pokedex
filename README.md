@@ -64,7 +64,4 @@ Both the API and app will rebuild as changes are made to them.
 Then access "http://127.0.0.1:4200/"
 
 ## Tests
-
-### Frontend
-
-### Backend
+docker compose run --rm -- api npm test

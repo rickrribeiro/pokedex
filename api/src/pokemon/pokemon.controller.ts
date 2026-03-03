@@ -49,7 +49,6 @@ export class PokemonController {
       body.pokemon,
       body.chatHistory || [],
     );
-    console.log(body.chatHistory);
     return {
       response,
     };
