@@ -1,0 +1,47 @@
+<div>
+  <div class="detail-container">
+    <div class="pokemon-card">
+      <div class="header">
+        <span class="pokedex-number">#{{ pokemon().id }}</span>
+        <h1>{{ pokemon().name }}</h1>
+        <div class="types">
+          @for (t of pokemon().types; track t.type.name) {
+          <span class="type-badge" [ngClass]="t.type.name">{{ t.type.name }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="main-info">
+        <img [src]="pokemon().sprites.other['official-artwork'].front_default" [alt]="pokemon().name">
+
+        <div class="info-group">
+          <h3>Physique</h3>
+          <div class="stats-grid">
+            <p><strong>Weight:</strong> {{ pokemon().weight / 10 }} kg</p>
+            <p><strong>Height:</strong> {{ pokemon().height / 10 }} m</p>
+          </div>
+
+          <h3>Abilities</h3>
+          <div class="abilities">
+            @for (a of pokemon().abilities; track a.ability.name) {
+            <span class="ability-tag">{{ a.ability.name }}</span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="base-stats">
+        <h3>Base Stats</h3>
+        @for (s of pokemon().stats; track s.stat.name) {
+        <div class="stat-row">
+          <span class="stat-name">{{ s.stat.name }}</span>
+          <span class="stat-val">{{ s.base_stat }}</span>
+          <div class="stat-bar-bg">
+            <div class="stat-bar-fill" [style.width.%]="s.base_stat"></div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

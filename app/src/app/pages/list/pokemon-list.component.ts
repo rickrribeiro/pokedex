@@ -20,7 +20,7 @@ export class PokemonListComponent implements OnInit {
   }
 
   loadAll() {
-    this.pokemonService.getPokemons(4, 0).subscribe({
+    this.pokemonService.getPokemons(8, 0).subscribe({
       next: (data) => {
         this.list.set(data.results);
         this.totalPokemons.set(data.count);
@@ -40,7 +40,7 @@ export class PokemonListComponent implements OnInit {
     event.stopPropagation();
     this.loadingMore.set(true);
     const offset = this.list().length;
-    this.pokemonService.getPokemons(4, offset).subscribe({
+    this.pokemonService.getPokemons(8, offset).subscribe({
       next: (data) => {
         this.list.update(oldList => [...oldList, ...data.results]);
         this.loadingMore.set(false);

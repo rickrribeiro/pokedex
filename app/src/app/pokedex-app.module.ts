@@ -9,6 +9,7 @@ import { PokemonListComponent } from "./pages/list/pokemon-list.component";
 import { PokemonDetailsComponent } from "./pages/details/pokemon-details.component";
 import { PokemonCardComponent } from "./components/card/pokemon-card.component";
 import { PokemonSearchBarComponent } from "./components/search/pokemon-search-bar.component";
+import { PokemonDetailCardComponent } from "./components/detail-card/pokemon-detail-card.component";
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { PokemonSearchBarComponent } from "./components/search/pokemon-search-ba
     PokemonDetailsComponent,
     PokedexAppComponent,
     PokemonCardComponent,
-    PokemonSearchBarComponent
+    PokemonSearchBarComponent,
+    PokemonDetailCardComponent
   ],
   bootstrap: [PokedexAppComponent],
 })
