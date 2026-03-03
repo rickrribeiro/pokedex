@@ -11,13 +11,13 @@ export class PokemonService {
   }
 
   async getAll(
-    page: number,
+    offset: number,
     limit: number,
   ): Promise<{ count: number; results: PokemonListItem[] }> {
     try {
       const res = await this.pokedexAPI.getPokemonsList({
         limit,
-        offset: (page - 1) * limit,
+        offset: offset,
       });
 
       if (res.results.length === 0) {
@@ -36,12 +36,12 @@ export class PokemonService {
     }
   }
 
-  async getById(id: string): Promise<PokedexAPI.Pokemon> {
+  async getByNameOrId(nameOrId: string): Promise<PokedexAPI.Pokemon> {
     try {
-      return await this.pokedexAPI.getPokemonByName(id);
+      return await this.pokedexAPI.getPokemonByName(nameOrId);
     } catch (error: any) {
       console.log({
-        message: "There was an ERROR on PokemonService.getById:",
+        message: "There was an ERROR on PokemonService.getByNameOrId:",
         error,
       });
       if (error?.status === 404) {
